@@ -14,14 +14,20 @@ data = pd.DataFrame({
 # Extract the input features (previous season stats)
 X = data[['G', 'Yds', 'TD', 'Int', 'Rate']].values
 
-# Extract the output feature (next season stats)
-y = data['G'].shift(-1).dropna().values
+# Extract the output features (next season stats)
+y = data[['Yds', 'TD', 'Int', 'Rate']].shift(-1).dropna().values
 
-# Create a linear regression model and fit it to the data
-model = LinearRegression()
-model.fit(X[:-1], y)
+# Create a linear regression model for each output feature
+models = []
+for i in range(y.shape[1]):
+    model = LinearRegression()
+    model.fit(X[:-1], y[:, i])
+    models.append(model)
 
 # Predict the player's next season stats based on their previous season stats
-next_season_stats = model.predict([X[-1]])
-print(f"Predicted G: {next_season_stats[0]}")
+next_season_stats = [model.predict([X[-1]])[0] for model in models]
 
+# Print the predicted next season stats
+predicted_categories = ['Yds', 'TD', 'Int', 'Rate']
+for category, prediction in zip(predicted_categories, next_season_stats):
+    print(f"Predicted {category}: {prediction}")
