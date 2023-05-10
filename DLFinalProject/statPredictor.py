@@ -3,12 +3,12 @@ from sklearn.linear_model import LinearRegression
 
 # Load the dataset into a Pandas DataFrame
 data = pd.DataFrame({
-    'G': [15, 17, 17, 49],
-    'QBrec': ['6-9-0', '9-8-0', '10-7-0', '25-24-0'],
-    'Yds': [4336, 5014, 4739, 14089],
-    'TD': [31, 38, 25, 94],
-    'Int': [10, 15, 10, 35],
-    'Rate': [98.3, 97.7, 93.2, 96.2]
+    'G': [15, 17, 17],
+    'QBrec': ['6-9-0', '9-8-0', '10-7-0'],
+    'Yds': [4336, 5014, 4739],
+    'TD': [31, 38, 25],
+    'Int': [10, 15, 10],
+    'Rate': [98.3, 97.7, 93.2]
 })
 
 # Extract the input features (previous season stats)
